@@ -31,3 +31,15 @@ public class Todo {
         }
     }
 }
+// 追加：入力を配列に入れて、新しい件数を返す
+static int add(String[] tasks, boolean[] done, int count, Scanner sc) {
+System.out.print("やること > ");
+String t = sc.nextLine();
+tasks[count] = t; // ヒント：入力した t を入れる
+done[count] = false; // ヒント：追加した直後は未完了
+count++;
+System.out.println("追加しました");
+return count; // ヒント：新しい count を返す
+}
+
+
