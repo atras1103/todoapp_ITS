@@ -30,16 +30,57 @@ public class Todo {
             }
         }
     }
-}
-// 追加：入力を配列に入れて、新しい件数を返す
-static int add(String[] tasks, boolean[] done, int count, Scanner sc) {
-System.out.print("やること > ");
-String t = sc.nextLine();
-tasks[count] = t; // ヒント：入力した t を入れる
-done[count] = false; // ヒント：追加した直後は未完了
-count++;
-System.out.println("追加しました");
-return count; // ヒント：新しい count を返す
-}
 
+  // 追加：入力を配列に入れて、新しい件数を返す
+  static int add(String[] tasks, boolean[] done, int count, Scanner sc) {
+    System.out.print("やること > ");
+    String t = sc.nextLine();
+    tasks[count] = t; // ヒント：入力した t を入れる
+    done[count] = false; // ヒント：追加した直後は未完了
+    count++;
+    System.out.println("追加しました");
+    return count; // ヒント：新しい count を返す
+  }
 
+  // 一覧：完了[x]／未完了[ ] を表示する
+  static void list(String[] tasks, boolean[] done, int count) {
+    if (count == 0) {
+      System.out.println("タスクはありません");
+    } else {
+      for (int i = 0; i < count; i++) {
+        System.out.println((i + 1) + ": [" + (done[i] ? "x" : " ") + "] " + tasks[i]);
+      }
+    }
+  }
+
+  // 完了：n 番目を完了にする
+  static void complete(boolean[] done, int count, Scanner sc) {
+    System.out.print("完了する番号 > ");
+    int n = sc.nextInt();
+    sc.nextLine();
+    if (n >= 1 && n <= count) {
+      done[n - 1] = true; // ヒント：done の n-1 番目を完了にする
+      System.out.println("完了にしました");
+    } else {
+     System.out.println("その番号はありません");
+    }
+  }
+
+  // 削除：n 番目を消して、新しい件数を返す
+  static int delete(String[] tasks, boolean[] done, int count, Scanner sc) {
+    System.out.print("削除する番号 > ");
+    int n = sc.nextInt();
+    sc.nextLine();
+    if (n >= 1 && n <= count) {
+      for (int i = n - 1; i < count - 1; i++) { // ヒント：詰める範囲
+      tasks[i] = tasks[i + 1]; // ヒント：1 つ後ろを前へ
+      done[i] = done[i + 1];
+    }
+    count--;
+    System.out.println("削除しました");
+    } else {
+      System.out.println("その番号はありません");
+    }
+    return count; // ヒント：新しい count を返す
+  }
+}
